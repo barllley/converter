@@ -1,0 +1,71 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:convert"
+             x:Class="convert.MainPage"
+             x:DataType="local:MainPage"
+             Title="Конвертер валют">
+
+    <!-- Устанавливаем линейный градиентный фон -->
+    <ContentPage.Background>
+        <LinearGradientBrush>
+            <GradientStop Color="#6A47F9" Offset="0.0" />
+            <GradientStop Color="#FFAEF6" Offset="1.0" />
+        </LinearGradientBrush>
+    </ContentPage.Background>
+
+    <Grid Padding="20" >
+        <VerticalStackLayout Spacing="20">
+
+            <!-- Метка с текущей датой курса -->
+            <Label Text="{Binding RateDateText}" 
+                       FontSize="Large" 
+                       HorizontalOptions="Center" 
+                       TextColor="White" 
+                       FontAttributes="Bold" />
+
+            <!-- Отображение даты -->
+            <StackLayout Orientation="Horizontal" Spacing="10">
+                <Label Text="Дата:" VerticalOptions="Center" TextColor="White" FontSize="Medium" />
+                <DatePicker Date="{Binding SelectedDate, Mode=TwoWay}" Format="d" HorizontalOptions="FillAndExpand" BackgroundColor="#201351" TextColor="White" />
+            </StackLayout>
+
+            <!-- Блок ввода суммы и выбора исходной валюты -->
+            <Frame CornerRadius="15" Padding="0" BackgroundColor="#201351">
+                <StackLayout Orientation="Horizontal" Padding="10" Spacing="10">
+                    <Picker Title="Валюта" 
+                            ItemsSource="{Binding Currencies}"  
+                            SelectedItem="{Binding SourceCurrency, Mode=TwoWay}" 
+                            TextColor="White" 
+                            BackgroundColor="Transparent" />
+                    <Entry Text="{Binding SourceAmount, Mode=TwoWay}"  
+                           Keyboard="Numeric" 
+                           FontSize="Medium"
+                           TextColor="White" 
+                           Placeholder="1" 
+                           BackgroundColor="Transparent" />
+                </StackLayout>
+            </Frame>
+
+        
+
+            <!-- Блок отображения результата и выбора целевой валюты -->
+            <Frame CornerRadius="15" Padding="0" BackgroundColor="#201351">
+                <StackLayout Orientation="Horizontal" Padding="10" Spacing="10">
+                    <Picker Title="Валюта"  
+                           ItemsSource="{Binding Currencies}"  
+                           SelectedItem="{Binding TargetCurrency, Mode=TwoWay}" 
+                           TextColor="White" 
+                           BackgroundColor="Transparent" />
+                    <Entry Text="{Binding TargetAmount}"  
+                           IsReadOnly="True" 
+                           FontSize="Medium"
+                           TextColor="White" 
+                           Placeholder="0,00" 
+                           BackgroundColor="Transparent" />
+                </StackLayout>
+            </Frame>
+
+        </VerticalStackLayout>
+    </Grid>
+</ContentPage>
